@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} {Kategori.isim}} {% endblock %}
+
+
+
+{% block icerik %}
+
+<div class="container pt-5">
+    <div class="row">
+        <h1>{{kategori.isim}}</h1>
+        <hr>
+        <p>{{kategori.aciklama}}</p>
+    </div>
+
+    <div class="row">
+        {% for urun in urunler %}
+        <div class="col-md-3 col-6 mt-3">
+            <div class="card" >
+              <img src="{{urun.resim.url}}" class="card-img-top" alt="...">
+               <div class="card-body">
+                   <p class="card-text fs-3">
+                   {% if  urun.fiyat %}
+                       {{  urun.indirimlifiyat }}$
+
+                      <del class="text-secondary fs-6 "> {{ urun.fiyat}} $ </del>
+
+                   {% else %}
+                      {{ urun.fiyat }}$
+                   {% endif %}
+                  </p>
+                   <h5 class="card-title">{{urun.isim}}</h5>
+
+                   <a href="{% url 'urundetay' urun.slug %}" class="btn btn-success " style="width:100%">Go somewhere</a>
+               </div>
+           </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
